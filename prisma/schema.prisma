@@ -1,0 +1,187 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum CompanyType {
+  PRODUCT
+  SERVICE
+  STARTUP
+}
+
+enum UniversalLevel {
+  L1
+  L2
+  L3
+  L4
+  L5
+  L6
+  L7
+}
+
+enum WorkMode {
+  REMOTE
+  HYBRID
+  ONSITE
+}
+
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  name          String?
+  password      String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  
+  submissions   Submission[]
+  savedCompanies SavedCompany[]
+  comparisons   Comparison[]
+  aiAnalyses    AIAnalysis[]
+  
+  @@map("users")
+}
+
+model Company {
+  id          String      @id @default(cuid())
+  name        String      @unique
+  slug        String      @unique
+  type        CompanyType
+  logoUrl     String?
+  website     String?
+  description String?
+  headquarters String?
+  foundedYear Int?
+  employeeCount Int?
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  
+  bandMappings  BandMapping[]
+  submissions   Submission[]
+  salaryTrends  SalaryTrend[]
+  savedBy       SavedCompany[]
+  aiAnalyses    AIAnalysis[]
+  
+  @@map("companies")
+}
+
+model BandMapping {
+  id              String         @id @default(cuid())
+  companyId       String
+  rawBand         String
+  universalLevel  UniversalLevel
+  confidence      Float?
+  description     String?
+  minYoe          Int?
+  maxYoe          Int?
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+  
+  company Company @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  
+  @@unique([companyId, rawBand])
+  @@map("band_mappings")
+}
+
+model Submission {
+  id              String         @id @default(cuid())
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+  
+  userId          String?
+  user            User?          @relation(fields: [userId], references: [id])
+  
+  companyId       String
+  company         Company        @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  
+  rawBand         String
+  normalizedLevel UniversalLevel?
+  role            String
+  yoe             Int
+  location        String
+  city            String?
+  workMode        WorkMode?
+  
+  baseSalary      Float
+  bonus           Float?
+  stocks          Float?
+  signingBonus    Float?
+  totalComp       Float
+  
+  // Monthly in-hand salary in rupees
+  monthlyInhand   Int?
+  
+  isVerified      Boolean        @default(false)
+  voteCount       Int            @default(1)
+  confidence      Float?
+  ipHash          String?
+  source          String?
+  
+  @@unique([companyId, rawBand, yoe, role])
+  @@index([companyId, normalizedLevel])
+  @@map("submissions")
+}
+
+model SalaryTrend {
+  id              String         @id @default(cuid())
+  companyId       String
+  normalizedLevel UniversalLevel
+  year            Int
+  quarter         Int
+  medianBase      Float
+  medianBonus     Float
+  medianStocks    Float
+  medianTotal     Float
+  sampleCount     Int
+  updatedAt       DateTime       @updatedAt
+  
+  company         Company        @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  
+  @@unique([companyId, normalizedLevel, year, quarter])
+  @@index([companyId])
+  @@map("salary_trends")
+}
+
+model SavedCompany {
+  id          String   @id @default(cuid())
+  userId      String
+  companyId   String
+  createdAt   DateTime @default(now())
+  
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  company     Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  
+  @@unique([userId, companyId])
+  @@map("saved_companies")
+}
+
+model Comparison {
+  id          String   @id @default(cuid())
+  userId      String
+  name        String
+  companyIds  String[]
+  levels      UniversalLevel[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  @@map("comparisons")
+}
+
+model AIAnalysis {
+  id          String   @id @default(cuid())
+  userId      String?
+  companyId   String
+  level       UniversalLevel
+  analysis    Json
+  createdAt   DateTime @default(now())
+  
+  user        User?    @relation(fields: [userId], references: [id])
+  company     Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  
+  @@map("ai_analyses")
+}
