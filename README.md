@@ -8,18 +8,6 @@ TrueComp is a full-stack web platform that helps engineers understand what compe
 
 ---
 
-## 📸 Screenshots
-
-| Homepage | Compare Companies | Company Details |
-|----------|-------------------|-----------------|
-| <img src="https://via.placeholder.com/400x200?text=TrueComp+Homepage" alt="Homepage" width="400"/> | <img src="https://via.placeholder.com/400x200?text=Compare+Salaries" alt="Compare" width="400"/> | <img src="https://via.placeholder.com/400x200?text=Company+Details" alt="Company Details" width="400"/> |
-
-| AI Hub | JobAI | Submit Salary |
-|--------|-------|---------------|
-| <img src="https://via.placeholder.com/400x200?text=AI+Hub" alt="AI Hub" width="400"/> | <img src="https://via.placeholder.com/400x200?text=JobAI" alt="JobAI" width="400"/> | <img src="https://via.placeholder.com/400x200?text=Submit+Salary" alt="Submit" width="400"/> |
-
----
-
 ## 🎯 Why
 
 Compensation benchmarking in the Indian tech market has historically been fragmented and inconsistent. Existing platforms are largely built around US-market conventions and don't account for how Indian companies structure levels, bands, and total compensation.
