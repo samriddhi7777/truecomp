@@ -7,23 +7,16 @@ import {
   Briefcase, 
   Code, 
   MapPin, 
-  Award, 
   Save, 
   Edit, 
-  Plus, 
   X,
   CheckCircle,
-  AlertCircle,
   Building2,
-  GraduationCap,
-  Globe,
-  Mail,
-  Phone,
-  Calendar,
-  FileText,
+  ArrowLeft,
   Sparkles,
   Shield,
-  ArrowLeft
+  Award,
+  TrendingUp
 } from 'lucide-react'
 
 // Skill categories
@@ -46,7 +39,6 @@ const POPULAR_SKILLS = [
   { name: 'JavaScript', category: 'frontend' },
   { name: 'HTML/CSS', category: 'frontend' },
   { name: 'Tailwind CSS', category: 'frontend' },
-  
   { name: 'Node.js', category: 'backend' },
   { name: 'Python', category: 'backend' },
   { name: 'Java', category: 'backend' },
@@ -55,7 +47,6 @@ const POPULAR_SKILLS = [
   { name: 'Spring Boot', category: 'backend' },
   { name: 'Django', category: 'backend' },
   { name: 'Express.js', category: 'backend' },
-  
   { name: 'AWS', category: 'cloud' },
   { name: 'Azure', category: 'cloud' },
   { name: 'Docker', category: 'cloud' },
@@ -64,19 +55,15 @@ const POPULAR_SKILLS = [
   { name: 'CI/CD', category: 'cloud' },
   { name: 'Git', category: 'cloud' },
   { name: 'Linux', category: 'cloud' },
-  
   { name: 'Machine Learning', category: 'data' },
   { name: 'Data Science', category: 'data' },
   { name: 'SQL', category: 'data' },
-  { name: 'Python (Data)', category: 'data' },
   { name: 'TensorFlow', category: 'data' },
   { name: 'Power BI', category: 'data' },
-  
   { name: 'React Native', category: 'mobile' },
   { name: 'Flutter', category: 'mobile' },
   { name: 'Swift', category: 'mobile' },
   { name: 'Kotlin', category: 'mobile' },
-  { name: 'Android', category: 'mobile' },
 ]
 
 const COMPANIES = [
@@ -103,11 +90,7 @@ export default function ProfilePage() {
   const [isEditing, setIsEditing] = useState(false)
   const [showSuccess, setShowSuccess] = useState(false)
   
-  // User profile data
   const [profile, setProfile] = useState({
-    name: 'Samriddhi Kumar',
-    email: 'samriddhi@example.com',
-    phone: '+91 98765 43210',
     location: 'Bengaluru',
     experience: 'mid',
     currentCompany: '',
@@ -213,7 +196,7 @@ export default function ProfilePage() {
             <div className="text-sm text-blue-300">Skills</div>
           </div>
           <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 text-center border border-white/10">
-            <div className="text-2xl font-bold text-green-400">{profile.experience}</div>
+            <div className="text-2xl font-bold text-green-400 capitalize">{profile.experience}</div>
             <div className="text-sm text-blue-300">Experience Level</div>
           </div>
           <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 text-center border border-white/10">
@@ -226,70 +209,9 @@ export default function ProfilePage() {
           </div>
         </div>
 
-        {/* Profile Form */}
+        {/* Profile Form - Without Personal Details */}
         <div className="space-y-6">
-          {/* Personal Info */}
-          <div className="bg-white/10 backdrop-blur-md rounded-2xl border border-white/10 p-6">
-            <h2 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
-              <User className="w-5 h-5 text-blue-400" />
-              Personal Information
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-sm text-blue-300 mb-1">Full Name</label>
-                <input
-                  type="text"
-                  value={profile.name}
-                  onChange={(e) => setProfile({...profile, name: e.target.value})}
-                  disabled={!isEditing}
-                  className={`w-full bg-white/10 border border-white/20 rounded-lg px-4 py-2 text-white placeholder-blue-300/50 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none ${
-                    !isEditing && 'opacity-70 cursor-not-allowed'
-                  }`}
-                />
-              </div>
-              <div>
-                <label className="block text-sm text-blue-300 mb-1">Email</label>
-                <input
-                  type="email"
-                  value={profile.email}
-                  onChange={(e) => setProfile({...profile, email: e.target.value})}
-                  disabled={!isEditing}
-                  className={`w-full bg-white/10 border border-white/20 rounded-lg px-4 py-2 text-white placeholder-blue-300/50 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none ${
-                    !isEditing && 'opacity-70 cursor-not-allowed'
-                  }`}
-                />
-              </div>
-              <div>
-                <label className="block text-sm text-blue-300 mb-1">Phone</label>
-                <input
-                  type="tel"
-                  value={profile.phone}
-                  onChange={(e) => setProfile({...profile, phone: e.target.value})}
-                  disabled={!isEditing}
-                  className={`w-full bg-white/10 border border-white/20 rounded-lg px-4 py-2 text-white placeholder-blue-300/50 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none ${
-                    !isEditing && 'opacity-70 cursor-not-allowed'
-                  }`}
-                />
-              </div>
-              <div>
-                <label className="block text-sm text-blue-300 mb-1">Location</label>
-                <select
-                  value={profile.location}
-                  onChange={(e) => setProfile({...profile, location: e.target.value})}
-                  disabled={!isEditing}
-                  className={`w-full bg-white/10 border border-white/20 rounded-lg px-4 py-2 text-white focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none ${
-                    !isEditing && 'opacity-70 cursor-not-allowed'
-                  }`}
-                >
-                  {LOCATIONS.map(loc => (
-                    <option key={loc} value={loc}>{loc}</option>
-                  ))}
-                </select>
-              </div>
-            </div>
-          </div>
-
-          {/* Experience & Job */}
+          {/* Professional Details */}
           <div className="bg-white/10 backdrop-blur-md rounded-2xl border border-white/10 p-6">
             <h2 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
               <Briefcase className="w-5 h-5 text-green-400" />
@@ -304,9 +226,7 @@ export default function ProfilePage() {
                   onChange={(e) => setProfile({...profile, currentCompany: e.target.value})}
                   disabled={!isEditing}
                   placeholder="e.g., Google"
-                  className={`w-full bg-white/10 border border-white/20 rounded-lg px-4 py-2 text-white placeholder-blue-300/50 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none ${
-                    !isEditing && 'opacity-70 cursor-not-allowed'
-                  }`}
+                  className={`w-full bg-white/10 border border-white/20 rounded-lg px-4 py-2 text-white placeholder-blue-300/50 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none ${!isEditing && 'opacity-70 cursor-not-allowed'}`}
                 />
               </div>
               <div>
@@ -317,9 +237,7 @@ export default function ProfilePage() {
                   onChange={(e) => setProfile({...profile, jobTitle: e.target.value})}
                   disabled={!isEditing}
                   placeholder="e.g., Software Engineer"
-                  className={`w-full bg-white/10 border border-white/20 rounded-lg px-4 py-2 text-white placeholder-blue-300/50 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none ${
-                    !isEditing && 'opacity-70 cursor-not-allowed'
-                  }`}
+                  className={`w-full bg-white/10 border border-white/20 rounded-lg px-4 py-2 text-white placeholder-blue-300/50 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none ${!isEditing && 'opacity-70 cursor-not-allowed'}`}
                 />
               </div>
               <div>
@@ -328,9 +246,7 @@ export default function ProfilePage() {
                   value={profile.experience}
                   onChange={(e) => setProfile({...profile, experience: e.target.value})}
                   disabled={!isEditing}
-                  className={`w-full bg-white/10 border border-white/20 rounded-lg px-4 py-2 text-white focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none ${
-                    !isEditing && 'opacity-70 cursor-not-allowed'
-                  }`}
+                  className={`w-full bg-white/10 border border-white/20 rounded-lg px-4 py-2 text-white focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none ${!isEditing && 'opacity-70 cursor-not-allowed'}`}
                 >
                   {EXPERIENCE_LEVELS.map(level => (
                     <option key={level.value} value={level.value}>{level.label}</option>
@@ -343,9 +259,7 @@ export default function ProfilePage() {
                   value={profile.lookingFor}
                   onChange={(e) => setProfile({...profile, lookingFor: e.target.value})}
                   disabled={!isEditing}
-                  className={`w-full bg-white/10 border border-white/20 rounded-lg px-4 py-2 text-white focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none ${
-                    !isEditing && 'opacity-70 cursor-not-allowed'
-                  }`}
+                  className={`w-full bg-white/10 border border-white/20 rounded-lg px-4 py-2 text-white focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none ${!isEditing && 'opacity-70 cursor-not-allowed'}`}
                 >
                   <option value="Full-time">Full-time</option>
                   <option value="Part-time">Part-time</option>
@@ -361,10 +275,43 @@ export default function ProfilePage() {
                   disabled={!isEditing}
                   rows={3}
                   placeholder="Tell us about your experience, achievements, and career goals..."
-                  className={`w-full bg-white/10 border border-white/20 rounded-lg px-4 py-2 text-white placeholder-blue-300/50 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none resize-none ${
-                    !isEditing && 'opacity-70 cursor-not-allowed'
-                  }`}
+                  className={`w-full bg-white/10 border border-white/20 rounded-lg px-4 py-2 text-white placeholder-blue-300/50 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none resize-none ${!isEditing && 'opacity-70 cursor-not-allowed'}`}
                 />
+              </div>
+            </div>
+          </div>
+
+          {/* Location & Preferences */}
+          <div className="bg-white/10 backdrop-blur-md rounded-2xl border border-white/10 p-6">
+            <h2 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+              <MapPin className="w-5 h-5 text-blue-400" />
+              Location & Preferences
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm text-blue-300 mb-1">Location</label>
+                <select
+                  value={profile.location}
+                  onChange={(e) => setProfile({...profile, location: e.target.value})}
+                  disabled={!isEditing}
+                  className={`w-full bg-white/10 border border-white/20 rounded-lg px-4 py-2 text-white focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none ${!isEditing && 'opacity-70 cursor-not-allowed'}`}
+                >
+                  {LOCATIONS.map(loc => (
+                    <option key={loc} value={loc}>{loc}</option>
+                  ))}
+                </select>
+              </div>
+              <div className="flex items-center gap-4 pt-6">
+                <label className="flex items-center gap-2 text-blue-300 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={profile.openToRemote}
+                    onChange={(e) => setProfile({...profile, openToRemote: e.target.checked})}
+                    disabled={!isEditing}
+                    className="w-4 h-4 accent-purple-500"
+                  />
+                  Open to Remote Work
+                </label>
               </div>
             </div>
           </div>
@@ -376,16 +323,12 @@ export default function ProfilePage() {
               Skills ({selectedSkills.length})
             </h2>
 
-            {/* Current Skills */}
             <div className="flex flex-wrap gap-2 mb-4">
               {selectedSkills.map(skill => (
                 <span key={skill} className="flex items-center gap-1 px-3 py-1 rounded-full bg-purple-500/30 text-purple-300 text-sm">
                   {skill}
                   {isEditing && (
-                    <button
-                      onClick={() => handleRemoveSkill(skill)}
-                      className="hover:text-purple-100 transition"
-                    >
+                    <button onClick={() => handleRemoveSkill(skill)} className="hover:text-purple-100 transition">
                       <X className="w-3 h-3" />
                     </button>
                   )}
@@ -411,15 +354,10 @@ export default function ProfilePage() {
                   />
                 </div>
 
-                {/* Skill Categories */}
                 <div className="flex flex-wrap gap-2 mb-4">
                   <button
                     onClick={() => setActiveCategory('all')}
-                    className={`px-3 py-1 rounded-full text-xs font-medium transition ${
-                      activeCategory === 'all'
-                        ? 'bg-purple-500/40 text-white'
-                        : 'bg-white/10 text-blue-300 hover:bg-white/20'
-                    }`}
+                    className={`px-3 py-1 rounded-full text-xs font-medium transition ${activeCategory === 'all' ? 'bg-purple-500/40 text-white' : 'bg-white/10 text-blue-300 hover:bg-white/20'}`}
                   >
                     All
                   </button>
@@ -427,32 +365,22 @@ export default function ProfilePage() {
                     <button
                       key={cat.id}
                       onClick={() => setActiveCategory(cat.id)}
-                      className={`px-3 py-1 rounded-full text-xs font-medium transition ${
-                        activeCategory === cat.id
-                          ? cat.color.replace('text-', 'bg-').replace('/20', '/40') + ' text-white'
-                          : 'bg-white/10 text-blue-300 hover:bg-white/20'
-                      }`}
+                      className={`px-3 py-1 rounded-full text-xs font-medium transition ${activeCategory === cat.id ? 'bg-purple-500/40 text-white' : 'bg-white/10 text-blue-300 hover:bg-white/20'}`}
                     >
                       {cat.label}
                     </button>
                   ))}
                 </div>
 
-                {/* Popular Skills */}
                 <div className="flex flex-wrap gap-2">
                   {filteredSkills.map(skill => (
                     <button
                       key={skill.name}
                       onClick={() => handleAddSkill(skill.name)}
-                      className={`px-3 py-1 rounded-full text-xs transition ${
-                        selectedSkills.includes(skill.name)
-                          ? 'bg-green-500/30 text-green-300 cursor-default'
-                          : 'bg-white/10 text-blue-300 hover:bg-white/20'
-                      }`}
+                      className={`px-3 py-1 rounded-full text-xs transition ${selectedSkills.includes(skill.name) ? 'bg-green-500/30 text-green-300 cursor-default' : 'bg-white/10 text-blue-300 hover:bg-white/20'}`}
                       disabled={selectedSkills.includes(skill.name)}
                     >
                       {skill.name}
-                      {!selectedSkills.includes(skill.name) && ' +'}
                     </button>
                   ))}
                 </div>
@@ -467,16 +395,12 @@ export default function ProfilePage() {
               Preferred Companies ({selectedCompanies.length})
             </h2>
 
-            {/* Current Companies */}
             <div className="flex flex-wrap gap-2 mb-4">
               {selectedCompanies.map(company => (
                 <span key={company} className="flex items-center gap-1 px-3 py-1 rounded-full bg-orange-500/30 text-orange-300 text-sm">
                   {company}
                   {isEditing && (
-                    <button
-                      onClick={() => handleRemoveCompany(company)}
-                      className="hover:text-orange-100 transition"
-                    >
+                    <button onClick={() => handleRemoveCompany(company)} className="hover:text-orange-100 transition">
                       <X className="w-3 h-3" />
                     </button>
                   )}
@@ -485,7 +409,7 @@ export default function ProfilePage() {
             </div>
 
             {isEditing && (
-              <div className="flex gap-2">
+              <div className="flex flex-wrap gap-2">
                 <input
                   type="text"
                   value={companyInput}
@@ -496,42 +420,20 @@ export default function ProfilePage() {
                       setCompanyInput('')
                     }
                   }}
-                  placeholder="Type a company name and press Enter..."
+                  placeholder="Type a company name..."
                   className="flex-1 bg-white/10 border border-white/20 rounded-lg px-4 py-2 text-white placeholder-blue-300/50 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none"
                 />
-                <div className="flex flex-wrap gap-2">
-                  {COMPANIES.filter(c => !selectedCompanies.includes(c)).slice(0, 5).map(company => (
-                    <button
-                      key={company}
-                      onClick={() => handleAddCompany(company)}
-                      className="px-3 py-1 rounded-full bg-white/10 text-blue-300 text-xs hover:bg-white/20 transition"
-                    >
-                      + {company}
-                    </button>
-                  ))}
-                </div>
+                {COMPANIES.filter(c => !selectedCompanies.includes(c)).slice(0, 5).map(company => (
+                  <button
+                    key={company}
+                    onClick={() => handleAddCompany(company)}
+                    className="px-3 py-1 rounded-full bg-white/10 text-blue-300 text-xs hover:bg-white/20 transition"
+                  >
+                    + {company}
+                  </button>
+                ))}
               </div>
             )}
-          </div>
-
-          {/* Preferences */}
-          <div className="bg-white/10 backdrop-blur-md rounded-2xl border border-white/10 p-6">
-            <h2 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
-              <Shield className="w-5 h-5 text-teal-400" />
-              Preferences
-            </h2>
-            <div className="flex items-center gap-4">
-              <label className="flex items-center gap-2 text-blue-300 cursor-pointer">
-                <input
-                  type="checkbox"
-                  checked={profile.openToRemote}
-                  onChange={(e) => setProfile({...profile, openToRemote: e.target.checked})}
-                  disabled={!isEditing}
-                  className="w-4 h-4 accent-purple-500"
-                />
-                Open to Remote Work
-              </label>
-            </div>
           </div>
         </div>
 
