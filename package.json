@@ -1,6 +1,7 @@
 {
   "name": "truecomp",
   "version": "0.1.0",
+  "description": "Salary transparency platform for Indian tech companies",
   "private": true,
   "scripts": {
     "dev": "next dev",
