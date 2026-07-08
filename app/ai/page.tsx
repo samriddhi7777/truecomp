@@ -9,7 +9,6 @@ import { Sparkles, Zap, BarChart3, TrendingDown, Brain, Rocket, Lightbulb, Star 
 export default function AIPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-teal-800">
-      {/* Hero Section */}
       <div className="relative overflow-hidden">
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-0 left-0 w-96 h-96 bg-purple-500 rounded-full blur-3xl"></div>
@@ -20,16 +19,13 @@ export default function AIPage() {
           <div className="text-center">
             <div className="flex items-center justify-center gap-3 mb-4">
               <Sparkles className="w-10 h-10 text-teal-400" />
-              <h1 className="text-4xl md:text-5xl font-bold text-white">
-                AI-Powered Career Tools
-              </h1>
+              <h1 className="text-4xl md:text-5xl font-bold text-white">AI-Powered Career Tools</h1>
             </div>
             <p className="text-xl text-blue-200 max-w-2xl mx-auto">
               Supercharge your career with AI-driven insights, analysis, and personalized recommendations
             </p>
           </div>
 
-          {/* Feature Highlights */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-12">
             <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 text-center border border-white/10">
               <Brain className="w-8 h-8 text-teal-400 mx-auto mb-2" />
@@ -55,10 +51,8 @@ export default function AIPage() {
         </div>
       </div>
 
-      {/* AI Tools Grid */}
       <div className="max-w-7xl mx-auto px-4 py-12">
         <div className="grid lg:grid-cols-2 gap-8">
-          {/* Offer Analyzer */}
           <div className="bg-white/10 backdrop-blur-md rounded-2xl border border-white/10 p-6 hover:border-teal-400/50 transition">
             <div className="flex items-center gap-3 mb-4">
               <div className="p-2 bg-teal-500/20 rounded-lg">
@@ -72,7 +66,6 @@ export default function AIPage() {
             <OfferAnalyzer />
           </div>
 
-          {/* Career Roast */}
           <div className="bg-white/10 backdrop-blur-md rounded-2xl border border-white/10 p-6 hover:border-orange-400/50 transition">
             <div className="flex items-center gap-3 mb-4">
               <div className="p-2 bg-orange-500/20 rounded-lg">
@@ -86,7 +79,6 @@ export default function AIPage() {
             <CareerRoast />
           </div>
 
-          {/* Level Comparer */}
           <div className="bg-white/10 backdrop-blur-md rounded-2xl border border-white/10 p-6 hover:border-purple-400/50 transition">
             <div className="flex items-center gap-3 mb-4">
               <div className="p-2 bg-purple-500/20 rounded-lg">
@@ -100,7 +92,6 @@ export default function AIPage() {
             <LevelComparer />
           </div>
 
-          {/* Layoff Tracker */}
           <div className="bg-white/10 backdrop-blur-md rounded-2xl border border-white/10 p-6 hover:border-red-400/50 transition">
             <div className="flex items-center gap-3 mb-4">
               <div className="p-2 bg-red-500/20 rounded-lg">
@@ -115,7 +106,6 @@ export default function AIPage() {
           </div>
         </div>
 
-        {/* Bottom CTA */}
         <div className="mt-12 text-center bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 p-8">
           <h3 className="text-2xl font-bold text-white mb-2">Ready to Transform Your Career?</h3>
           <p className="text-blue-200 mb-4">Use AI-powered insights to make smarter career decisions</p>

@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { PrismaClient } from '@prisma/client'
 
+export const dynamic = 'force-dynamic'
+
 const prisma = new PrismaClient()
 
 export async function GET(request: NextRequest) {
@@ -51,20 +53,15 @@ export async function GET(request: NextRequest) {
     }
 
     const totals = subs.map(s => s.totalComp).sort((a, b) => a - b)
+    const monthlyInhands = subs.map(s => s.monthlyInhand || 0).sort((a, b) => a - b)
     const yoeValues = subs.map(s => s.yoe)
-    
-    // Calculate monthly in-hand - use stored value or calculate
-    const inhands = subs.map(s => {
-      if (s.monthlyInhand) return s.monthlyInhand
-      return Math.round((s.totalComp * 100000 * 0.6) / 12)
-    }).sort((a, b) => a - b)
 
     return NextResponse.json({
       company: company.name,
       count,
       data: {
         medianTotal: Math.round(totals[Math.floor(totals.length / 2)]),
-        medianMonthly: Math.round(inhands[Math.floor(inhands.length / 2)]),
+        medianMonthly: Math.round(monthlyInhands[Math.floor(monthlyInhands.length / 2)]),
         averageYoe: Math.round(yoeValues.reduce((a, b) => a + b, 0) / count * 10) / 10,
       }
     })
