@@ -1,36 +1,134 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# TrueComp
 
-## Getting Started
+**Salary transparency for Indian tech companies.**
 
-First, run the development server:
+TrueComp is a full-stack web platform that helps engineers understand what compensation actually looks like across Indian tech companies — normalized onto a universal leveling scale so offers and roles can be meaningfully compared, regardless of how individual companies name their bands internally.
+
+🔗 **Live:** [truecomp.vercel.app](https://truecomp.vercel.app)
+
+---
+
+## 📸 Screenshots
+
+| Homepage | Compare Companies | Company Details |
+|----------|-------------------|-----------------|
+| <img src="https://via.placeholder.com/400x200?text=TrueComp+Homepage" alt="Homepage" width="400"/> | <img src="https://via.placeholder.com/400x200?text=Compare+Salaries" alt="Compare" width="400"/> | <img src="https://via.placeholder.com/400x200?text=Company+Details" alt="Company Details" width="400"/> |
+
+| AI Hub | JobAI | Submit Salary |
+|--------|-------|---------------|
+| <img src="https://via.placeholder.com/400x200?text=AI+Hub" alt="AI Hub" width="400"/> | <img src="https://via.placeholder.com/400x200?text=JobAI" alt="JobAI" width="400"/> | <img src="https://via.placeholder.com/400x200?text=Submit+Salary" alt="Submit" width="400"/> |
+
+---
+
+## 🎯 Why
+
+Compensation benchmarking in the Indian tech market has historically been fragmented and inconsistent. Existing platforms are largely built around US-market conventions and don't account for how Indian companies structure levels, bands, and total compensation.
+
+**TrueComp solves this by:**
+- ✅ Normalizing company-specific bands onto a universal L1–L7 scale
+- ✅ Showing REAL in-hand salary (after PF, tax, gratuity)
+- ✅ Providing AI-powered career insights
+- ✅ Enabling anonymous community contributions
+
+---
+
+## ✨ Features
+
+### Core Features
+
+| Feature | Description |
+|---------|-------------|
+| **Salary Comparison** | Compare compensation data across companies, levels, and cities |
+| **Universal Leveling (L1–L7)** | A normalization engine that maps each company's internal band naming (e.g. SDE-2, L4, Senior Engineer) onto a single comparable scale |
+| **Company Profiles** | Company-specific compensation breakdowns with level-wise salary data |
+| **AI-Powered Tools** | Offer analysis and level comparison to support informed decision-making |
+| **Community Contributions** | Anonymized, crowdsourced salary submissions with a live compensation calculator during submission |
+
+### Additional Features
+
+- **JobAI** — AI-powered job matching with auto-apply functionality
+- **Career Roast** — Get brutally honest career feedback from AI personalities
+- **Layoff Tracker** — Stay updated with the latest layoffs across industries
+- **Offer Analyzer** — Upload your offer letter for real-time market analysis
+- **Profile Management** — Manage your skills, experience, and career preferences
+
+---
+
+## 🛠️ Tech Stack
+
+| Layer | Technology |
+|-------|------------|
+| **Framework** | Next.js 14 (App Router) |
+| **Language** | TypeScript |
+| **Database** | PostgreSQL (Supabase) |
+| **ORM** | Prisma |
+| **Authentication** | NextAuth.js |
+| **Validation** | Zod |
+| **Styling** | Tailwind CSS |
+| **UI Components** | Lucide React |
+| **AI Integration** | OpenAI API |
+| **Deployment** | Vercel |
+
+---
+
+## 🏗️ Architecture Highlights
+
+### 1. Leveling Normalization Engine
+Maps heterogeneous company band names to a consistent L1–L7 scale for accurate cross-company comparison.
+
+### 2. Schema Design for Crowdsourced Data
+Handles validation, deduplication, and flexible data entry (multiple compensation components, city/cost-of-living context) via Prisma + Zod.
+
+### 3. Multi-step Submission Flow
+Live comp calculator gives users real-time feedback as they submit data, rather than a black-box form.
+
+### 4. Glass Morphism UI
+Modern, premium design system with consistent dark theme across all pages.
+
+---
+
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js 18+ 
+- npm or pnpm
+- PostgreSQL database (or Supabase account)
+
+### Installation
 
 ```bash
+# Clone the repository
+git clone https://github.com/samriddhi7777/truecomp.git
+cd truecomp
+
+# Install dependencies
+npm install
+
+# Set up environment variables
+cp .env.example .env.local
+# Add your DATABASE_URL, Supabase credentials, and NextAuth secrets
+
+# Push database schema
+npx prisma db push
+
+# Generate Prisma Client
+npx prisma generate
+
+# Seed the database with initial companies
+npx prisma db seed
+
+# Start the development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+📄 License
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+This project is open for learning and reference purposes. Feel free to explore the code.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+👨‍💻 Author
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Samriddhi Thakur
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+GitHub: @samriddhi7777
